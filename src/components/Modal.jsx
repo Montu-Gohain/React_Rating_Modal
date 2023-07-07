@@ -6,11 +6,13 @@ const Modal = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Show Modal</button>
+      <ShowModalButton onClick={() => setShowModal(true)}>
+        Show Modal
+      </ShowModalButton>
       {showModal && (
         <ModalBackground onClick={() => setShowModal(false)}>
           <ModalBody onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setShowModal(false)}>Hide Modal</button>
+            <HideButton onClick={() => setShowModal(false)} />
             {children}
           </ModalBody>
         </ModalBackground>
@@ -39,19 +41,64 @@ const ModalBackground = styled.div`
 `;
 // ^ SlideDown Animation
 
-const fadeIn = keyframes`
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
+const SlideDown = keyframes`
+  from{
+    transform: translateY(-50%);
+    opacity: 0.1;
+  }
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
 `;
 const ModalBody = styled.div`
-  background-color: white;
-  width: 500px;
-  height: 200px;
-  border-radius: 10px;
+  width: 920px;
+  height: 444px;
+  border-radius: 20px;
   padding: 10px;
-  animation: ${fadeIn} 0.3s ease-in;
+  background-color: #1a1832;
+  color: white;
+  animation: ${SlideDown} 400ms ease-in;
+  position: relative;
+`;
+// ^ Hide modal Button
+const HideButton = styled.button`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  right: 35px;
+  top: 20px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1.8px;
+    background-color: white;
+    transform: translate(0, -50%);
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+`;
+const ShowModalButton = styled.button`
+  position: fixed;
+  border-radius: 5px;
+  color: white;
+  margin: 20px 0px 0px 20px;
+  border: none;
+  padding: 15px;
+  font-family: Inter;
+  font-size: large;
+  background-color: #7a58f4;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
 `;
