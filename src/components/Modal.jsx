@@ -43,7 +43,7 @@ const ModalBackground = styled.div`
 
 const SlideDown = keyframes`
   from{
-    transform: translateY(-50%);
+    transform: translateY(-30%);
     opacity: 0.1;
   }
   to{
@@ -60,6 +60,7 @@ const ModalBody = styled.div`
   color: white;
   animation: ${SlideDown} 400ms ease-in;
   position: relative;
+  z-index: 2;
 `;
 // ^ Hide modal Button
 const HideButton = styled.button`
@@ -97,8 +98,12 @@ const ShowModalButton = styled.button`
   margin: 20px 0px 0px 20px;
   border: none;
   padding: 15px;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-size: large;
   background-color: #7a58f4;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
